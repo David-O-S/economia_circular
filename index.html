@@ -1,416 +1,285 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda de Peluches</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Acceso a los proyectos escolares de economía circular.">
+  <title>Proyecto economía circular</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --navy: #18334b;
+      --navy-deep: #102638;
+      --green: #28745a;
+      --green-light: #eaf3ee;
+      --paper: #f5f7f6;
+      --white: #ffffff;
+      --text: #243746;
+      --muted: #647583;
+      --border: #dce5e1;
+      --shadow: 0 8px 24px rgba(24, 51, 75, .07);
     }
+
+    * { box-sizing: border-box; }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: Aptos, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
     }
 
-    header {
-      background-color: #ff6f91;
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
+    .hero {
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+      color: var(--white);
+      padding: 34px 20px 42px;
+      border-bottom: 5px solid var(--green);
     }
 
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 8px;
+    .hero-inner {
+      width: min(100%, 1080px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
     }
 
-    header p {
-      font-size: 1rem;
+    .logo {
+      width: 118px;
+      height: 118px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      border-radius: 12px;
+      background: #fff;
+      padding: 5px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: #c9dfd4;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.12;
+      letter-spacing: -.025em;
+    }
+
+    .hero-description {
+      margin: 12px 0 0;
+      max-width: 600px;
+      color: #e3ebf0;
+      font-size: 1.02rem;
     }
 
     main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 30px 20px;
+      width: min(100% - 40px, 1080px);
+      margin: 36px auto 52px;
     }
 
-    .grid-productos {
+    .section-heading {
       display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: var(--navy);
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      margin: 0;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: .92rem;
+      white-space: nowrap;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 172px;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--white);
+      color: inherit;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: #9dbdaf;
+      box-shadow: 0 12px 28px rgba(24, 51, 75, .12);
+    }
+
+    .project-card:focus-visible {
+      outline: 3px solid #7db49a;
+      outline-offset: 3px;
+    }
+
+    .project-number {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 14px;
+      border-radius: 9px;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: .83rem;
+      font-weight: 800;
     }
 
-    .producto {
-      background-color: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    .project-title {
+      color: var(--navy);
+      font-size: 1.13rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .project-link {
       display: flex;
-      flex-direction: column;
-      width: 250px;
-    }
-
-    .producto img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .producto-info {
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .producto-info h2 {
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-    }
-
-    .producto-info p {
-      font-size: 0.9rem;
-      color: #666;
-      flex-grow: 1;
-      margin-bottom: 10px;
-    }
-
-    .precio {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #ff6f91;
-      margin-bottom: 10px;
-    }
-
-    .boton-comprar {
-      background-color: #ff6f91;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-
-    .boton-comprar:hover {
-      background-color: #e85c7d;
+      align-items: center;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 16px;
+      color: var(--green);
+      font-size: .92rem;
+      font-weight: 700;
     }
 
     footer {
+      padding: 22px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
       text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
-      margin-top: 40px;
+      font-size: .88rem;
     }
 
-    .whatsapp {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px 0;
-      gap: 10px;
+    @media (max-width: 800px) {
+      .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-inner { gap: 20px; }
+      .logo { width: 100px; height: 100px; }
     }
 
-    .whatsapp img {
-      width: 30px;
+    @media (max-width: 520px) {
+      .hero { padding: 26px 18px 30px; }
+      .hero-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+      }
+      .logo { width: 92px; height: 92px; }
+      .hero-description { font-size: .96rem; }
+      main { width: min(100% - 28px, 1080px); margin-top: 27px; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .project-grid { grid-template-columns: 1fr; gap: 12px; }
+      .project-card { min-height: 145px; padding: 18px; }
     }
 
-    .whatsapp a {
-      text-decoration: none;
-      padding: 5px;
-      background-color: #3cc24e;
-      border-radius: 8px;
-      color: white;
-    }
-
-    .mercadopago {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      margin: 15px 0;
-    }
-
-    .mercadopago a {
-      text-decoration: none;
-      padding: 5px;
-      background-color: #2abdff;
-      border-radius: 8px;
-      color: white;
-    }
-
-    .mercadopago img {
-      width: 30px;
-      border-radius: 8px;
-    }
-
-    .instagran {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      margin: 15px 0;
-    }
-
-    .instagran img {
-      width: 30px;
-      border-radius: 8px;
-    }
-
-    .instagran a {
-      text-decoration: none;
-      padding: 5px;
-      background-color: #e23352;
-      border-radius: 8px;
-      color: white;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
-
 <body>
-
-  <header>
-    <h1>🧸 Tienda de Peluches</h1>
-    <p>Los peluches más tiernos para regalar o coleccionar</p>
-
-    <div class="whatsapp">
-      <img src="imagenes/WhatsApp.svg.webp" alt="">
-      <a href="https://wa.me/+5493513534923">Mandanos un Whatsapp
-      </a>
+  <header class="hero">
+    <div class="hero-inner">
+      <img class="logo" src="data:image/jpeg;base64,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" alt="Logo del Centro Educativo Cristo Rey">
+      <div>
+        <p class="eyebrow">Centro Educativo Cristo Rey</p>
+        <h1>Proyecto economía circular</h1>
+        <p class="hero-description">Conocé las propuestas y los sitios web desarrollados por los estudiantes.</p>
+      </div>
     </div>
-
-    <div class="mercadopago">
-      <img src="imagenes/mercado-pago3162.logowik.com.webp" alt="">
-      <a href="link.mercadopago.com.ar/lafamiliabusiness">Link de Mercado Pago
-      </a>
-    </div>
-    <div class="instagran">
-      <img src="imagenes/instagran.jpg" alt="Instagram">
-      <a href="https://www.instagram.com/david.o.sq" target="_blank" rel="noopener noreferrer" class="ig-link">
-        Seguinos en Instagram
-      </a>
-    </div>
-
   </header>
 
   <main>
-    <div class="grid-productos">
-
-      <div class="producto">
-        <img src="imagenes/peluche01.webp" alt="Peluche Osito Clásico">
-        <div class="producto-info">
-          <h2>Osito Clásico</h2>
-          <p>Osito de peluche suave, ideal para abrazar y decorar la habitación.</p>
-          <span class="precio">$8.500</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche02.webp" alt="Peluche Conejo Orejón">
-        <div class="producto-info">
-          <h2>Conejo Orejón</h2>
-          <p>Conejo de orejas largas, tela afelpada y relleno hipoalergénico.</p>
-          <span class="precio">$7.900</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche03.jpg" alt="Peluche Perrito Dormilón">
-        <div class="producto-info">
-          <h2>Perrito Dormilón</h2>
-          <p>Perrito con expresión tierna, perfecto para dormir acompañado.</p>
-          <span class="precio">$9.200</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche04.webp" alt="Peluche Gatito Curioso">
-        <div class="producto-info">
-          <h2>Gatito Curioso</h2>
-          <p>Gatito de peluche con ojos brillantes y colita esponjosa.</p>
-          <span class="precio">$8.100</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche05.webp" alt="Peluche Panda Bebé">
-        <div class="producto-info">
-          <h2>Panda Bebé</h2>
-          <p>Panda tierno en blanco y negro, tamaño mediano.</p>
-          <span class="precio">$10.400</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche06.jpg" alt="Peluche Elefante Chiquito">
-        <div class="producto-info">
-          <h2>Elefante Chiquito</h2>
-          <p>Elefante gris de trompa larga, ideal para bebés.</p>
-          <span class="precio">$7.300</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche07.jpg" alt="Peluche León Melenudo">
-        <div class="producto-info">
-          <h2>León Melenudo</h2>
-          <p>León con melena esponjosa y expresión amigable.</p>
-          <span class="precio">$9.800</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche08.webp" alt="Peluche Jirafa Alta">
-        <div class="producto-info">
-          <h2>Jirafa Alta</h2>
-          <p>Jirafa de cuello largo y manchas cosidas a mano.</p>
-          <span class="precio">$11.000</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche09.jpg" alt="Peluche Zorro Astuto">
-        <div class="producto-info">
-          <h2>Zorro Astuto</h2>
-          <p>Zorro de colores cálidos, cola grande y suave.</p>
-          <span class="precio">$8.700</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche10.avif" alt="Peluche Koala Tierno">
-        <div class="producto-info">
-          <h2>Koala Tierno</h2>
-          <p>Koala abrazado a una rama, textura ultra suave.</p>
-          <span class="precio">$9.500</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche11.jpg" alt="Peluche Pingüino Polar">
-        <div class="producto-info">
-          <h2>Pingüino Polar</h2>
-          <p>Pingüino blanco y negro con bufanda tejida.</p>
-          <span class="precio">$8.300</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche12.webp" alt="Peluche Unicornio Mágico">
-        <div class="producto-info">
-          <h2>Unicornio Mágico</h2>
-          <p>Unicornio con crin de colores y cuerno bordado.</p>
-          <span class="precio">$10.900</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche13.jpg" alt="Peluche Tigre Rayado">
-        <div class="producto-info">
-          <h2>Tigre Rayado</h2>
-          <p>Tigre de rayas suaves y mirada juguetona.</p>
-          <span class="precio">$9.100</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche14.webp" alt="Peluche Oveja Lanuda">
-        <div class="producto-info">
-          <h2>Oveja Lanuda</h2>
-          <p>Oveja blanca de lana simulada, muy esponjosa.</p>
-          <span class="precio">$7.600</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche15.jpg" alt="Peluche Rana Saltarina">
-        <div class="producto-info">
-          <h2>Rana Saltarina</h2>
-          <p>Rana verde de ojos grandes y sonrisa simpática.</p>
-          <span class="precio">$6.900</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche16.webp" alt="Peluche Pulpo Multicolor">
-        <div class="producto-info">
-          <h2>Pulpo Multicolor</h2>
-          <p>Pulpo de ocho tentáculos con textura acolchada.</p>
-          <span class="precio">$9.900</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche17.webp" alt="Peluche Búho Nocturno">
-        <div class="producto-info">
-          <h2>Búho Nocturno</h2>
-          <p>Búho de plumas bordadas y ojos grandes redondos.</p>
-          <span class="precio">$8.400</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluuche18.webp" alt="Peluche Dinosaurio Amigable">
-        <div class="producto-info">
-          <h2>Dinosaurio Amigable</h2>
-          <p>Dinosaurio verde con espinas suaves en el lomo.</p>
-          <span class="precio">$10.200</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche19.webp" alt="Peluche Ballena Azul">
-        <div class="producto-info">
-          <h2>Ballena Azul</h2>
-          <p>Ballena grande y liviana, ideal como almohadón.</p>
-          <span class="precio">$12.300</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="producto">
-        <img src="imagenes/peluche20.webp" alt="Peluche Mono Trepador">
-        <div class="producto-info">
-          <h2>Mono Trepador</h2>
-          <p>Mono de brazos largos con velcro en las manos.</p>
-          <span class="precio">$8.800</span>
-          <button class="boton-comprar">Agregar al carrito</button>
-        </div>
-      </div>
-
+    <div class="section-heading">
+      <h2>Proyectos participantes</h2>
+      <span class="count">11 proyectos</span>
     </div>
+    <section class="project-grid" aria-label="Enlaces a los proyectos de economía circular">
+      <a class="project-card" href="https://martinalpz874.github.io/eucalipto/EUCALIPTO.html" target="_blank" rel="noopener noreferrer" aria-label="Abrir EUCALIPTO en una nueva pestaña">
+        <span class="project-number">01</span>
+        <span class="project-title">EUCALIPTO</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://laureanovs123-svg.github.io/proyecto_economia/" target="_blank" rel="noopener noreferrer" aria-label="Abrir ALTA PINTA en una nueva pestaña">
+        <span class="project-number">02</span>
+        <span class="project-title">ALTA PINTA</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://gonzaloivang10-maker.github.io/tomia_ec/index.html" target="_blank" rel="noopener noreferrer" aria-label="Abrir TOMIA en una nueva pestaña">
+        <span class="project-number">03</span>
+        <span class="project-title">TOMIA</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://laureanovs123-svg.github.io/economia_valen/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Revesti en una nueva pestaña">
+        <span class="project-number">04</span>
+        <span class="project-title">Revesti</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://julieta353.github.io/Segunda-Vuelta/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Segunda Vuelta en una nueva pestaña">
+        <span class="project-number">05</span>
+        <span class="project-title">Segunda Vuelta</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://axelburin777.github.io/economia-circular/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Indumentaria CR en una nueva pestaña">
+        <span class="project-number">06</span>
+        <span class="project-title">Indumentaria CR</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://niquito0.github.io/Economia-Circular-VMancs.idm/" target="_blank" rel="noopener noreferrer" aria-label="Abrir VMancs  Nicolàs Blanco en una nueva pestaña">
+        <span class="project-number">07</span>
+        <span class="project-title">VMancs</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://vickypons.github.io/tabuve/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Tabuve en una nueva pestaña">
+        <span class="project-number">08</span>
+        <span class="project-title">Tabuve</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://benjahelenacamila09.github.io/Ecolook2026/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Ecolook2026 en una nueva pestaña">
+        <span class="project-number">09</span>
+        <span class="project-title">Ecolook2026</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://bibi69420.github.io/Toy-selling/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Toy selling en una nueva pestaña">
+        <span class="project-number">10</span>
+        <span class="project-title">Toy selling</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="project-card" href="https://thianlis.github.io/unamasecocircular/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Renacer eco circular en una nueva pestaña">
+        <span class="project-number">11</span>
+        <span class="project-title">Renacer eco circular</span>
+        <span class="project-link">Visitar sitio <span aria-hidden="true">↗</span></span>
+      </a>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 Tienda de Peluches - Todos los derechos reservados</p>
+    Centro Educativo Cristo Rey · Proyecto economía circular
   </footer>
-
 </body>
-
 </html>
